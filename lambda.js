@@ -4,8 +4,9 @@ let named_symbols = {
     'FALSE': [{'lambda':'a'}, {'lambda':'b'}, 'b'],
     'NOT': [{'lambda':'a'}, 'a','FALSE','TRUE'],
     'AND':[{'lambda':'a'}, {'lambda':'b'}, 'a', 'b', 'FALSE'],
-    //'OR': [{'lambda':'e'}, {'lambda':'f'}, 'e', 'TRUE', 'f'],
-    'Y': [{'lambda':'f'}, [{'lambda': 'x'}, 'f', ['x', 'x']], [{'lambda': 'x'}, 'f', ['x', 'x']]]
+    'OR': [{'lambda':'e'}, {'lambda':'f'}, 'e', 'TRUE', 'f'],
+    'Y': [{'lambda':'f'}, [{'lambda': 'x'}, 'f', ['x', 'x']], [{'lambda': 'x'}, 'f', ['x', 'x']]],
+    'OMEGA': [{'lambda':'x'}, ['x', 'x'], {'lambda':'x'}, ['x', 'x']]
 }
 
 
