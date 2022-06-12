@@ -6,8 +6,10 @@ let named_symbols = {
     'AND':[{'lambda':'a'}, {'lambda':'b'}, 'a', 'b', 'FALSE'],
     'OR': [{'lambda':'e'}, {'lambda':'f'}, 'e', 'TRUE', 'f'],
     'Y': [{'lambda':'f'}, [{'lambda': 'x'}, 'f', ['x', 'x']], [{'lambda': 'x'}, 'f', ['x', 'x']]],
-    'OMEGA': [{'lambda':'x'}, ['x', 'x'], {'lambda':'x'}, ['x', 'x']]
+    'OMEGA': [[{'lambda':'x'}, ['x', 'x']], [{'lambda':'x'}, ['x', 'x']]]
 }
+
+let symbols_to_expand = ['Y','OMEGA'];
 
 
 let expand = function(symbol) {
@@ -98,9 +100,10 @@ let evaluate_step = function(lambda_expression, parent_expression = null) {
 
         // special case: don't expand if it's the only one remaining, and this is a top-level expression
         if(parent_expression === null && lambda_expression.length === 1){
-            return [lambda_expression, 'Done: just one token remaining.']
+        	if(!(symbols_to_expand.includes(first_token))){
+            	return [lambda_expression, 'Done: just one token remaining.']
+        	}
         }
-
 
         if(first_token in named_symbols) {
             lambda_expression[0] = named_symbols[first_token]
