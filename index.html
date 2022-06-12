@@ -6,6 +6,7 @@
   <title>Lambda Calculus Visualizer</title>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="lambda.js"></script>
+  <script src="submit.js"></script>
   <link rel="stylesheet" type="text/css" href="lambda.css">
 </head>
 
@@ -167,12 +168,24 @@
         			<a href='expand.html?expr=OMEGA' target='_'>OMEGA</a>
         	</tr>
         </table>
-        
-        
-		<div>
-        <br/>
-        I added a bit more examples
+     </div>   
+     <br>
+     <div class = "box">
+        <div>
+        	<h3>TRY IT YOURSELF</h3>
+        	<p>
+        		<label for="expression">Expression:</label>
+        		<input type="text" id="textbar" placeholder="AND TRUE OR FALSE FALSE">
+        	</p>
+        	<button type="submit" onclick="show_expression()">Show</button>
         </div>
+        
+        <p>
+        	<div class = "box-dot" id = "show">
+        	</div>
+        </p>
+        <p id = "alert"><p>
+        <p id = "link"><p>
     </div>
 </body>
 </html>

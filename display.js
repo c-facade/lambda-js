@@ -134,6 +134,7 @@ function actually_show() {
     prepare_next_step() 
 
     highlight_lists()
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 function show_next_step(){

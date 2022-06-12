@@ -31,6 +31,32 @@
     background: #eeeeee;
   }
 
+.greentext {
+	color: green;
+}
+
+.redtext {
+	color: red;
+}
+
+.box {
+	padding: 20px;
+	border-style: solid;
+	border-width: thin;
+	margin: auto;
+	width: 70%;
+}
+
+.box-dot {
+	padding: 10px;
+	border-style: dotted;
+	border-width: thin;
+	margin: auto;
+	margin-top: 10px;
+	width: 70%;
+}
+
+
 /*The rest is page styling, not lambda calculus styling.
 TODO: move to some other style file?*/
 #side_by_side {
