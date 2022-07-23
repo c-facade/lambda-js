@@ -84,3 +84,57 @@ table.expr_table td {
     border:1px black solid;
     padding:10px
 }
+
+body {
+	font-size: 20px;
+}
+
+div {
+	margin: 5px 5px 5px 5px;
+}
+
+hr.bigline {
+	margin-bottom: 40px;
+	border-style: hidden;
+}
+
+hr.general {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-style: solid;
+	border-color: #86af49;
+}
+
+h1 {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #b5e7a0;
+	/*outline-style: outset;
+	outline-width: medium;
+	outline-color: #d5e1df;
+	border-radius: 5px;*/
+}
+
+
+
+h2 {
+	margin: 10px 0px 10px 0px;
+	color: #86af49;
+}
+
+h3 {
+}
+
+h3 span {
+	border-radius: 5px;
+	background-color: #b5e7a0;
+	padding: 10px 20px 10px 10px;
+}
+
+div.example {
+	margin: 2px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #d5e1df;
+}
+

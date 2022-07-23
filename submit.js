@@ -20,7 +20,9 @@ function show_expression(){
 	}
 	//if we have a link we will insert it
 	if (link != null){
-		document.getElementById("link").appendChild(link);
+		linkdad = document.getElementById("link");
+		linkdad.replaceChild(link, linkdad.childNodes[0]);
+		//document.getElementById("link").appendChild(link);
 	}
 	window.scrollTo(0, document.body.scrollHeight);
 }
@@ -65,6 +67,7 @@ function highlight_and_makelink(parent, text){
 	
 	lnk = document.createElement("a");
 	lnk.setAttribute("href", link);
-	lnk.innerHTML = text;
+	lnk.innerHTML = text;	
+	lnk.setAttribute("target", "_");
 	return lnk; 
 }

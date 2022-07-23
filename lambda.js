@@ -6,10 +6,20 @@ let named_symbols = {
     'AND':[{'lambda':'a'}, {'lambda':'b'}, 'a', 'b', 'FALSE'],
     'OR': [{'lambda':'e'}, {'lambda':'f'}, 'e', 'TRUE', 'f'],
     'Y': [{'lambda':'f'}, [{'lambda': 'x'}, 'f', ['x', 'x']], [{'lambda': 'x'}, 'f', ['x', 'x']]],
-    'OMEGA': [[{'lambda':'x'}, ['x', 'x']], [{'lambda':'x'}, ['x', 'x']]]
+    'OMEGA': [[{'lambda':'x'}, ['x', 'x']], [{'lambda':'x'}, ['x', 'x']]],
+    'ZERO': [{'lambda':'z'}, {'lambda':'s'}, 'z'],
+    'ONE' : [{'lambda':'z'}, {'lambda':'s'}, 's', 'z'],
+    'PLUS' : [{'lambda':'m'}, [{'lambda':'n'}, 'm', ['n', 'ZERO', 'SUCC'], 'SUCC']],
+    'TIMES' : [{'lambda': 'm'}, [{'lambda':'n'}, 'm', 'ZERO', ['PLUS', 'n']]],
+    'SUCC': [{'lambda': 'a'}, [{'lambda':'b'}, [{'lambda':'c'}, 'b', ['a', 'b', 'c']]]]
 }
 
 let symbols_to_expand = ['Y','OMEGA'];
+
+//the number of named functions is growing, so we'll probably
+//have to start not showing them all
+//this is the list of the functions to show
+let symbols_to_view = ['TRUE', 'FALSE', 'ZERO', 'ONE']
 
 
 let expand = function(symbol) {
@@ -67,6 +77,7 @@ let apply_lambda = function(l, input_expression) {
 // This is a recursve function: if the first elemen of the expression is an array (i.e. another non-trivial expression),
 // it recurses into that array, passing the original expression as parent/context.
 let evaluate_step = function(lambda_expression, parent_expression = null) {
+	console.log(lambda_expression);
     // TODO: this modifies lambda_expression in place.
     if (!Array.isArray(lambda_expression)){
         return [lambda_expression, 'Single token remaining, can\'t expand further']
@@ -94,8 +105,8 @@ let evaluate_step = function(lambda_expression, parent_expression = null) {
 
         return [lambda_expression, message]
     }
-
     if(typeof first_token === 'string') {
+    	console.log(first_token);
         // This is a symbol/variable; try to look it up in named symbols
 
         // special case: don't expand if it's the only one remaining, and this is a top-level expression
@@ -103,6 +114,18 @@ let evaluate_step = function(lambda_expression, parent_expression = null) {
         	if(!(symbols_to_expand.includes(first_token))){
             	return [lambda_expression, 'Done: just one token remaining.']
         	}
+        }
+        
+     	if(!(isNaN(first_token))){
+     		console.log(lambda_expression);
+     		lambda_expression[0] = number_to_lambda(first_token);
+     		console.log(lambda_expression);
+     		[lambda_expression, message] = evaluate_step(lambda_expression, parent_expression)
+     		while(lambda_expression.length === 1 && Array.isArray(lambda_expression[0])){
+            	console.log('unnesting')
+            	lambda_expression = lambda_expression[0] // unnest in place
+            }
+            return [lambda_expression, message]
         }
 
         if(first_token in named_symbols) {
@@ -130,7 +153,7 @@ let evaluate_step = function(lambda_expression, parent_expression = null) {
         return [lambda_expression, `(Unnesting extraneous parentheses)`]
     }
     else {
-        return [lambda_expression, `stuck: can't apply lambda (nothing to apply it to)`]
+        	return [lambda_expression, `stuck: can't apply lambda (nothing to apply it to)`]
     }
 
 }
@@ -182,4 +205,32 @@ let write_expression = function(lambda_expression) {
         }
     }
     return expr
+}
+
+function number_to_lambda(n){
+	if (n == 0){
+		console.log(0);
+		let z = 'ZERO';
+		console.log(z);
+		return z;
+	}
+	let e = [];
+	let curr = e; 
+	while (n > 0){
+		curr.push('SUCC');
+		curr.push([]);
+		curr = curr[1];
+		console.log(e);
+		n = n-1;
+	}
+	curr.push('ZERO');
+	return e;
+}
+
+function clean(){
+	e = expr;
+	console.log(e);
+}
+
+function next_block(){
 }

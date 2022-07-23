@@ -58,9 +58,14 @@ function set_expr_reset_display(expr_obj) {
 // (return info necessary for display)
 function prepare_next_step() {
     [expr, _message] = evaluate_step(expr)
+    if (_message.startsWith('stuck: can\'t apply')){
+		_message = recursive_search(expr, _message);
+	}
 
     // Hacks - modify the previous row to highlight changes, based on the message
-    let ft = $('#expression .expr').last().find('.token').first() // the first token of the last expression
+    let ft = 
+    $('#expression .expr').last().find('.token').first() // the first token of the last expression
+   
 
     let highlight_color = ''
     let highlight_elems = []
@@ -171,4 +176,28 @@ for(s_name in named_symbols) {
     s_div.append(s_name + ' = ')
     s_div.append(draw_expression(named_symbols[s_name]))
     $('#symbols').append(s_div)
+}
+
+
+//RECURSIVE SEARCH of something that works
+function recursive_search(curr, prec = null, message){
+	console.log(curr)
+	if (curr == undefined){
+		return message;
+	}
+	if(message == undefined){
+		console.log("message undefined!");
+		return "";
+	}
+	if (Array.isArray(curr)){
+		i = 0;
+		while ((message.startsWith('stuck: can\'t apply')) && (curr[i] != undefined)){
+			message = recursive_search(curr[i], curr, message);
+			if (message.startsWith('stuck: can\'t apply')){
+				[curr[i], message] = evaluate_step(curr[i])
+			}
+			i++;
+		}
+	}
+	return message;	
 }
