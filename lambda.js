@@ -6,12 +6,7 @@ let named_symbols = {
     'AND':[{'lambda':'a'}, {'lambda':'b'}, 'a', 'b', 'FALSE'],
     'OR': [{'lambda':'e'}, {'lambda':'f'}, 'e', 'TRUE', 'f'],
     'Y': [{'lambda':'f'}, [{'lambda': 'x'}, 'f', ['x', 'x']], [{'lambda': 'x'}, 'f', ['x', 'x']]],
-    'OMEGA': [[{'lambda':'x'}, ['x', 'x']], [{'lambda':'x'}, ['x', 'x']]],
-    'ZERO': [{'lambda':'z'}, {'lambda':'s'}, 'z'],
-    'ONE' : [{'lambda':'z'}, {'lambda':'s'}, 's', 'z'],
-    'PLUS' : [{'lambda':'m'}, [{'lambda':'n'}, 'm', ['n', 'ZERO', 'SUCC'], 'SUCC']],
-    'TIMES' : [{'lambda': 'm'}, [{'lambda':'n'}, 'm', 'ZERO', ['PLUS', 'n']]],
-    'SUCC': [{'lambda': 'a'}, [{'lambda':'b'}, [{'lambda':'c'}, 'b', ['a', 'b', 'c']]]]
+    'OMEGA': [[{'lambda':'x'}, ['x', 'x']], [{'lambda':'x'}, ['x', 'x']]]
 }
 
 let symbols_to_expand = ['Y','OMEGA'];
